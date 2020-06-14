@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * Section contains the party address details.
  */
 @Schema(description = "Section contains the party address details.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-06-14T08:14:19.396797400+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-06-14T08:48:09.049340900+05:30[Asia/Calcutta]")
 public class Address {
   @JsonProperty("line1")
   private String line1 = null;

@@ -23,7 +23,7 @@ import java.time.LocalDate;
  * CollectionData
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-06-14T08:14:19.396797400+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-06-14T08:48:09.049340900+05:30[Asia/Calcutta]")
 public class CollectionData {
   @JsonProperty("creationDate")
   private LocalDate creationDate = null;
