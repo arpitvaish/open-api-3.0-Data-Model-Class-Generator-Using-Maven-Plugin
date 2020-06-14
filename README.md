@@ -1,1 +1,0 @@
-# open-api-3.0-Data-Model-Class-Generator-Using-Maven-Pluging
