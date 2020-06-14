@@ -1,4 +1,4 @@
-#Open API 3.0 - Data Model Generator using Maven Plugin
+# Open API 3.0 - Data Model Generator using Maven Plugin
 
 ## Introduction
 This java - maven project is used to generate all the Data Object Java classes specified in the .yaml specification file along with their relations.
