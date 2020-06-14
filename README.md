@@ -9,7 +9,7 @@ A simple command will generate all .java classes in the specified package withou
 1. Go to root directory of project
 2. Run `mvn clean install`
 
-##Configuration details in pom.xml
+## Configuration details in pom.xml
 1. package specification : ` <report.package.name>com.example.dataModel</report.package.name>`
 
 
