@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: Taxation Domain Model
+  description: 'Domain model for Tax data for Reporting Engine'
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    taxDetails:
+      title: taxDetails
+      type: array
+      items:
+        type: object
+        properties:
+          reportData:
+            $ref: 'schema/ReportData.yaml#/components/schemas/ReportData'
+          taxData:
+            $ref: 'schema/TaxData.yaml#/components/schemas/TaxData'
+          collectionData:
+            $ref: 'schema/CollectionData.yaml#/components/schemas/CollectionData'

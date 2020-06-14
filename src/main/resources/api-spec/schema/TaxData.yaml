@@ -1,0 +1,26 @@
+openapi: 3.0.0
+info:
+  title: Tax Data 
+  description: 'Domain model Tax Data'
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    TaxData:
+      title: TaxData
+      type: object
+      properties:
+        clientId:
+          type: string
+        dealId:
+          type: string
+        address:
+          $ref: '../global/Address.yaml#/components/schemas/Address'
+        currency:
+          $ref: '../global/Currency.yaml#/components/schemas/Currency'
+        txnAmountCurrency :
+          $ref: '../global/Amount.yaml#/components/schemas/Amount'
+        taxType:
+          type: string
+        taxAmountCurrency:
+          $ref: '../global/Amount.yaml#/components/schemas/Amount'

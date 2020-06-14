@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example.dataModel</groupId>
+    <artifactId>openapi3-dataModelCreator</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>openapi3-dataModelCreator</name>
+    <description>Create DTO Objects using data definitions from open api 3.0 spec</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <swagger-core-version>2.1.1</swagger-core-version>
+        <maven.test.skip>true</maven.test.skip>
+        <logback-version>1.1.7</logback-version>
+         <maven-plugin-version>1.0.0</maven-plugin-version>
+        <junit-version>4.8.1</junit-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <default.package>/src/main/java/com/example/dataModel</default.package>
+        <report.package.name>com.example.dataModel</report.package.name>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback-version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <scope>compile</scope>
+            <version>${swagger-core-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-core-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-maven-plugin</artifactId>
+            <version>3.0.18</version>
+        </dependency>
+
+
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!-- activate the plugin -->
+            <plugin>
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>3.0.18</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/api-spec/Taxation.yaml</inputSpec>
+                            <!-- <templateDirectory>${project.basedir}/src/main/resources</templateDirectory>-->
+                            <output>${project.basedir}</output>
+                            <language>java</language>
+                            <generateApis>false</generateApis>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <addCompileSourceRoot>false</addCompileSourceRoot>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                                <java8>true</java8>
+                            </configOptions>
+                            <modelPackage>${report.package.name}</modelPackage>
+                            <library>jersey2</library>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>libs-release</name>
+            <url>https://artifactory.global.standardchartered.com/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <snapshots />
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://artifactory.global.standardchartered.com/artifactory/libs-snapshot</url>
+        </repository>
+        <repository>
+            <id>archiva.default</id>
+            <name>archiva.default</name>
+            <url>https://artifactory.global.standardchartered.com/artifactory/maven-release</url>
+        </repository>
+    </repositories> -->
+
+    <!--<distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>https://artifactory.global.standardchartered.com/artifactory/maven-release
+            </url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>https://artifactory.global.standardchartered.com/artifactory/maven-snapshot
+            </url>
+        </snapshotRepository>
+    </distributionManagement>
+-->
+
+</project>
