@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Taxation Domain Model
-  description: 'Domain model for Tax data for Reporting Engine'
+  title: DAAS Specifications
+  description: 'API specifications for DAAS'
   version: 1.0.0
 paths: {}
 components:

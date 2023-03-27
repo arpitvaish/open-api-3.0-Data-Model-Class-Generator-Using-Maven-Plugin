@@ -19,22 +19,12 @@
         <junit-version>4.8.1</junit-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <default.package>/src/main/java/com/example/dataModel</default.package>
-        <report.package.name>com.example.dataModel</report.package.name>
+        <model.package.name>com.walmart.mint.daas.model</model.package.name>
+        <api.package.name>com.walmart.mint.daas.controller</api.package.name>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback-version}</version>
-            <scope>compile</scope>
-        </dependency>
+
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-jaxrs2</artifactId>
@@ -75,25 +65,52 @@
                 <version>3.0.18</version>
                 <executions>
                     <execution>
+                        <id>match-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/api-spec/Taxation.yaml</inputSpec>
-                            <!-- <templateDirectory>${project.basedir}/src/main/resources</templateDirectory>-->
+                            <inputSpec>${project.basedir}/src/main/resources/specifications/api/Match.yaml</inputSpec>
                             <output>${project.basedir}</output>
-                            <language>java</language>
-                            <generateApis>false</generateApis>
+                            <language>spring-boot</language>
+                            <!--<generateApis>false</generateApis>
                             <generateApiDocumentation>false</generateApiDocumentation>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <addCompileSourceRoot>false</addCompileSourceRoot>
                             <generateApiDocumentation>false</generateApiDocumentation>
-                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>-->
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                                <java8>true</java8>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <additionalModelTypeAnnotations>@lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
+                            </configOptions>
+                            <modelPackage>${model.package.name}</modelPackage>
+                            <apiPackage>${api.package.name}</apiPackage>
+                            <library>jersey2</library>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>product-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/specifications/api/Product.yaml</inputSpec>
+                            <output>${project.basedir}</output>
+                            <language>spring-boot</language>
+                            <!--<generateApis>false</generateApis>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <addCompileSourceRoot>false</addCompileSourceRoot>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>-->
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                                 <java8>true</java8>
                             </configOptions>
-                            <modelPackage>${report.package.name}</modelPackage>
+                            <modelPackage>${model.package.name}</modelPackage>
+                            <apiPackage>${api.package.name}</apiPackage>
                             <library>jersey2</library>
                         </configuration>
                     </execution>

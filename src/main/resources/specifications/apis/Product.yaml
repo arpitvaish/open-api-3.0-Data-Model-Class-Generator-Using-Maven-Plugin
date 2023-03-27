@@ -1,0 +1,31 @@
+openapi: 3.0.0
+apiVersion: 1.0.0
+resourcePath: /product
+produces:
+  - application/json
+info:
+  title: Product Specifications
+  description: 'API specifications for Product'
+  version: 1.0.0
+apis:
+  - path: "/{competitor_name}/{retailer_id}"
+    operations:
+      - method: GET
+        summary: Provides Product attributes details for Competitor and RetailerId
+        type:
+        parameters:
+          - name: body
+            description: QueryLook Object with List of String parameter
+            required: true
+            allowMultiple: false
+            type: QueryLookup
+            paramType: body
+        responseMessages:
+          - code: 400
+            message: Bad Request
+          - code: 404
+            message: Match Not found
+          - code: 405
+            message: Validation Exception
+          - code: 500
+            message: Internal Server Error
