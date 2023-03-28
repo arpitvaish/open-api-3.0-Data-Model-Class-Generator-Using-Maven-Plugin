@@ -7,7 +7,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>openapi3-dataModelCreator</name>
     <description>Create DTO Objects using data definitions from open api 3.0 spec</description>
-
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.1.RELEASE</version>
+        <relativePath />
+        <!-- lookup parent from repository -->
+    </parent>
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -15,12 +21,13 @@
         <swagger-core-version>2.1.1</swagger-core-version>
         <maven.test.skip>true</maven.test.skip>
         <logback-version>1.1.7</logback-version>
-         <maven-plugin-version>1.0.0</maven-plugin-version>
+        <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.8.1</junit-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <default.package>/src/main/java/com/example/dataModel</default.package>
         <model.package.name>com.walmart.mint.daas.model</model.package.name>
         <api.package.name>com.walmart.mint.daas.controller</api.package.name>
+        <invoker.package.name>com.walmart.mint.daas.invoker</invoker.package.name>
     </properties>
 
     <dependencies>
@@ -43,6 +50,16 @@
             <version>3.0.18</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
@@ -62,7 +79,7 @@
             <plugin>
                 <groupId>io.swagger.codegen.v3</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>3.0.18</version>
+                <version>3.0.41</version>
                 <executions>
                     <execution>
                         <id>match-api</id>
@@ -70,15 +87,17 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/specifications/api/Match.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/specifications/apis/Match.yaml</inputSpec>
                             <output>${project.basedir}</output>
-                            <language>spring-boot</language>
-                            <!--<generateApis>false</generateApis>
+                            <language>spring</language>
+                            <generateApis>true</generateApis>
                             <generateApiDocumentation>false</generateApiDocumentation>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <addCompileSourceRoot>false</addCompileSourceRoot>
                             <generateApiDocumentation>false</generateApiDocumentation>
-                            <generateModelDocumentation>false</generateModelDocumentation>-->
+                            <generateModelDocumentation>false</generateModelDocumentation>-
+                            <generateApiTests>true</generateApiTests>
+                            <generateModelTests>true</generateModelTests>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                                 <java8>true</java8>
@@ -87,7 +106,8 @@
                             </configOptions>
                             <modelPackage>${model.package.name}</modelPackage>
                             <apiPackage>${api.package.name}</apiPackage>
-                            <library>jersey2</library>
+                            <invokerPackage>${invoker.package.name}</invokerPackage>
+                            <library>spring-boot</library>
                         </configuration>
                     </execution>
                     <execution>
@@ -96,22 +116,28 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/specifications/api/Product.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/specifications/apis/Match.yaml</inputSpec>
                             <output>${project.basedir}</output>
-                            <language>spring-boot</language>
-                            <!--<generateApis>false</generateApis>
+                            <language>spring</language>
+                            <generateApis>true</generateApis>
+                            <generateModels>true</generateModels>
                             <generateApiDocumentation>false</generateApiDocumentation>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <addCompileSourceRoot>false</addCompileSourceRoot>
                             <generateApiDocumentation>false</generateApiDocumentation>
-                            <generateModelDocumentation>false</generateModelDocumentation>-->
+                            <generateModelDocumentation>false</generateModelDocumentation>-
+                            <generateApiTests>true</generateApiTests>
+                            <generateModelTests>true</generateModelTests>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                                 <java8>true</java8>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <additionalModelTypeAnnotations>@lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
                             </configOptions>
                             <modelPackage>${model.package.name}</modelPackage>
                             <apiPackage>${api.package.name}</apiPackage>
-                            <library>jersey2</library>
+                            <invokerPackage>${invoker.package.name}</invokerPackage>
+                            <library>spring-boot</library>
                         </configuration>
                     </execution>
                 </executions>

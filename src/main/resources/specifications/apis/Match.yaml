@@ -1,31 +1,28 @@
 openapi: 3.0.2
-apiVersion: 1.0.0
-resourcePath: /match
-produces:
-  - application/json
 info:
-  title: Match Specifications
-  description: 'API specifications for Match'
+  title: Match
+  description: 'API specifications for Product'
   version: 1.0.0
-apis:
-  - path: "/lookUp"
-    operations:
-      - method: POST
-        summary: Provides match lookup for itemIds
-        type:
-        parameters:
-          - name: body
-            description: QueryLook Object with List of String parameter
-            required: true
-            allowMultiple: false
-            type: QueryLookup
-            paramType: body
-        responseMessages:
-          - code: 400
-            message: Bad Request
-          - code: 404
-            message: Match Not found
-          - code: 405
-            message: Validation Exception
-          - code: 500
-            message: Internal Server Error
+paths:
+  /product/{competitor_name}:
+    post:
+      tags:
+        - Match
+      description: Provides Match lookup capabilities
+      operationId: matchLookUp
+      requestBody:
+        description: QueryLookup
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/QueryLookup.yaml'
+      responses:
+        '400':
+          description: Bad Request
+        '404':
+          description: Match Not found
+        '405':
+          description: Validation Exception
+        '500':
+          description: Internal Server Error

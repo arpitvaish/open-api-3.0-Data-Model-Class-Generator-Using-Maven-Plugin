@@ -1,161 +1,63 @@
 openapi: 3.0.2
-apiVersion: 1.0.0
-resourcePath: /product
-produces:
-  - application/json
 info:
-  title: Product Specifications
+  title: Product
   description: 'API specifications for Product'
   version: 1.0.0
-apis:
-  - path: "/{competitor_name}/{retailer_id}"
-    operations:
-      - method: GET
-        summary: Provides Product attributes details for Competitor and RetailerId
-        type:
-        parameters:
-          - name: body
-            description: QueryLook Object with List of String parameter
-            required: true
-            allowMultiple: false
-            type: QueryLookup
-            produces:
-              - application/json
-            parameters:
-              - name: competitor_name
-                description: name of competitor
-                required: true
-                allowMultiple: false
-                type: string
-                paramtype: path
-              - name: retailer_id
-                description: name of retailer
-                required: true
-                allowMultiple: false
-                type: string
-                paramtype: path
-              - in: header
-                  name: MOCK_REQUEST
-                  schema:
-                    type: string
-                  required: false
-              - in: header
-                  name: WM_CONSUMER.ID
-                  schema:
-                    type: string
-                  required: false
-              - in: header
-                  name: WM_SVC.NAME
-                  schema:
-                    type: string
-                  required: false
-              - in: header
-                  name: WM_SVC.VERSION
-                  schema:
-                    type: string
-                  required: false
-              - in: header
-                  name: WM_SVC.ENV
-                  schema:
-                    type: string
-                  required: false
-              - in: header
-                  name: WM_SEC.AUTH_SIGNATURE
-                  schema:
-                    type: string
-                  required: false
-              - in: header
-                  name: WM_CONSUMER.INTIMESTAMP
-                  schema:
-                    type: string
-                  required: false
-              - in: header
-                  name: WM_SEC.KEY_VERSION
-                  schema:
-                    type: string
-                  required: false
-        responseMessages:
-          - code: 400
-            message: Bad Request
-          - code: 404
-            message: Match Not found
-          - code: 405
-            message: Validation Exception
-          - code: 500
-            message: Internal Server Error
-      - path: "/lookup/{competitor_name}"
-          operations:
-            - method: POST
-              summary: Provides product lookup capabilities
-              type:
-              parameters:
-                - name: body
-                  description: QueryLook Object with List of String parameter
-                  required: true
-                  allowMultiple: false
-                  type:
-                    $ref: '../schemas/QueryLookup.yaml'
-                  produces:
-                    - application/json
-                  parameters:
-                    - name: competitor_name
-                      description: name of competitor
-                      required: true
-                      allowMultiple: false
-                      type: string
-                      paramtype: path
-                    - name: retailerId
-                      description: name of retailer
-                      required: true
-                      allowMultiple: false
-                      type: string
-                      paramtype: path
-                    - in: header
-                        name: MOCK_REQUEST
-                        schema:
-                          type: string
-                        required: false
-                    - in: header
-                        name: WM_CONSUMER.ID
-                        schema:
-                          type: string
-                        required: false
-                    - in: header
-                        name: WM_SVC.NAME
-                        schema:
-                          type: string
-                        required: false
-                    - in: header
-                        name: WM_SVC.VERSION
-                        schema:
-                          type: string
-                        required: false
-                    - in: header
-                        name: WM_SVC.ENV
-                        schema:
-                          type: string
-                        required: false
-                    - in: header
-                        name: WM_SEC.AUTH_SIGNATURE
-                        schema:
-                          type: string
-                        required: false
-                    - in: header
-                        name: WM_CONSUMER.INTIMESTAMP
-                        schema:
-                          type: string
-                        required: false
-                    - in: header
-                        name: WM_SEC.KEY_VERSION
-                        schema:
-                          type: string
-                        required: false
-              responseMessages:
-                - code: 400
-                  message: Bad Request
-                - code: 404
-                  message: Match Not found
-                - code: 405
-                  message: Validation Exception
-                - code: 500
-                  message: Internal Server Error
+paths:
+  /product/{competitor_name}:
+    post:
+      tags:
+        - Product
+      description: Provides Product lookup capabilities
+      operationId: productLookup
+      parameters:
+        - name: competitor_name
+          in: path
+          description: Competitor Name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: QueryLookup
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/QueryLookup.yaml'
+      responses:
+        '400':
+          description: Bad Request
+        '404':
+          description: Match Not found
+        '405':
+          description: Validation Exception
+        '500':
+          description: Internal Server Error
+  /product/{competitor_name}/{retailer_id}:
+    get:
+      tags:
+        - Product
+      description: Provides Product attributes details for Competitor and RetailerId
+      operationId: productDetailsByCompetitorAndRetailerId
+      parameters:
+        - name: competitor_name
+          in: path
+          description: Competitor Name
+          required: true
+          schema:
+            type: string
+        - name: retailer_id
+          in: path
+          description: Retailer Id
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Bad Request
+        '404':
+          description: Match Not found
+        '405':
+          description: Validation Exception
+        '500':
+          description: Internal Server Error
