@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.2
 apiVersion: 1.0.0
 resourcePath: /product
 produces:
@@ -19,7 +19,61 @@ apis:
             required: true
             allowMultiple: false
             type: QueryLookup
-            paramType: body
+            produces:
+              - application/json
+            parameters:
+              - name: competitor_name
+                description: name of competitor
+                required: true
+                allowMultiple: false
+                type: string
+                paramtype: path
+              - name: retailer_id
+                description: name of retailer
+                required: true
+                allowMultiple: false
+                type: string
+                paramtype: path
+              - in: header
+                  name: MOCK_REQUEST
+                  schema:
+                    type: string
+                  required: false
+              - in: header
+                  name: WM_CONSUMER.ID
+                  schema:
+                    type: string
+                  required: false
+              - in: header
+                  name: WM_SVC.NAME
+                  schema:
+                    type: string
+                  required: false
+              - in: header
+                  name: WM_SVC.VERSION
+                  schema:
+                    type: string
+                  required: false
+              - in: header
+                  name: WM_SVC.ENV
+                  schema:
+                    type: string
+                  required: false
+              - in: header
+                  name: WM_SEC.AUTH_SIGNATURE
+                  schema:
+                    type: string
+                  required: false
+              - in: header
+                  name: WM_CONSUMER.INTIMESTAMP
+                  schema:
+                    type: string
+                  required: false
+              - in: header
+                  name: WM_SEC.KEY_VERSION
+                  schema:
+                    type: string
+                  required: false
         responseMessages:
           - code: 400
             message: Bad Request
@@ -29,3 +83,79 @@ apis:
             message: Validation Exception
           - code: 500
             message: Internal Server Error
+      - path: "/lookup/{competitor_name}"
+          operations:
+            - method: POST
+              summary: Provides product lookup capabilities
+              type:
+              parameters:
+                - name: body
+                  description: QueryLook Object with List of String parameter
+                  required: true
+                  allowMultiple: false
+                  type:
+                    $ref: '../schemas/QueryLookup.yaml'
+                  produces:
+                    - application/json
+                  parameters:
+                    - name: competitor_name
+                      description: name of competitor
+                      required: true
+                      allowMultiple: false
+                      type: string
+                      paramtype: path
+                    - name: retailerId
+                      description: name of retailer
+                      required: true
+                      allowMultiple: false
+                      type: string
+                      paramtype: path
+                    - in: header
+                        name: MOCK_REQUEST
+                        schema:
+                          type: string
+                        required: false
+                    - in: header
+                        name: WM_CONSUMER.ID
+                        schema:
+                          type: string
+                        required: false
+                    - in: header
+                        name: WM_SVC.NAME
+                        schema:
+                          type: string
+                        required: false
+                    - in: header
+                        name: WM_SVC.VERSION
+                        schema:
+                          type: string
+                        required: false
+                    - in: header
+                        name: WM_SVC.ENV
+                        schema:
+                          type: string
+                        required: false
+                    - in: header
+                        name: WM_SEC.AUTH_SIGNATURE
+                        schema:
+                          type: string
+                        required: false
+                    - in: header
+                        name: WM_CONSUMER.INTIMESTAMP
+                        schema:
+                          type: string
+                        required: false
+                    - in: header
+                        name: WM_SEC.KEY_VERSION
+                        schema:
+                          type: string
+                        required: false
+              responseMessages:
+                - code: 400
+                  message: Bad Request
+                - code: 404
+                  message: Match Not found
+                - code: 405
+                  message: Validation Exception
+                - code: 500
+                  message: Internal Server Error

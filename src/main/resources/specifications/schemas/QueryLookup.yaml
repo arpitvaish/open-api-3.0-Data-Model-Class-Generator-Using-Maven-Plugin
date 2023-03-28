@@ -1,0 +1,9 @@
+type: object
+required:
+  - outputAttributes
+properties:
+outputAttributes:
+  type: Array
+  format: string
+metaData:
+  type: string

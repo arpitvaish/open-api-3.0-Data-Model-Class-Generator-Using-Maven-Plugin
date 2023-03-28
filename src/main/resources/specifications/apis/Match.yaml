@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.2
 apiVersion: 1.0.0
 resourcePath: /match
 produces:
