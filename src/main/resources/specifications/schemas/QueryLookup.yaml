@@ -1,3 +1,9 @@
+openapi: 3.0.2
+info:
+  title: Query Lookup
+  description: DSL for Query Lookup
+  version: 1.0.0
+paths: { }
 components:
   schemas:
     QueryLookup:

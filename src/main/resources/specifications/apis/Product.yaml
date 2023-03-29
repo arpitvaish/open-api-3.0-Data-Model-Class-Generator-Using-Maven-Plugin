@@ -23,7 +23,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../schemas/QueryLookup.yaml'
+              $ref: '../schemas/QueryLookup.yaml#/components/schemas/QueryLookup'
       responses:
         '400':
           description: Bad Request

@@ -44,16 +44,27 @@
             <version>${swagger-core-version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
         <dependency>
-            <groupId>io.swagger.codegen.v3</groupId>
-            <artifactId>swagger-codegen-maven-plugin</artifactId>
-            <version>3.0.18</version>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>6.4.0</version>
+            <scope>provided</scope>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -81,7 +92,7 @@
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
                 <version>3.0.41</version>
                 <executions>
-                    <execution>
+                   <!-- <execution>
                         <id>match-api</id>
                         <goals>
                             <goal>generate</goal>
@@ -101,7 +112,7 @@
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                                 <java11>true</java11>
-                                <!--suppress UnresolvedMavenProperty -->
+                                &lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;
                                 <additionalModelTypeAnnotations>@lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
                             </configOptions>
                             <modelPackage>${model.package.name}</modelPackage>
@@ -109,14 +120,14 @@
                             <invokerPackage>${invoker.package.name}</invokerPackage>
                             <library>spring-boot</library>
                         </configuration>
-                    </execution>
+                    </execution>-->
                     <execution>
                         <id>product-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/specifications/apis/Match.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/specifications/schemas/QueryLookup.yaml</inputSpec>
                             <output>${project.basedir}</output>
                             <language>spring</language>
                             <generateApis>true</generateApis>
@@ -131,8 +142,9 @@
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                                 <java11>true</java11>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <additionalModelTypeAnnotations>@lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
+                                <withLombok>true</withLombok>
+                                <useTags>true</useTags>
+                                <interfaceOnly>true</interfaceOnly>
                             </configOptions>
                             <modelPackage>${model.package.name}</modelPackage>
                             <apiPackage>${api.package.name}</apiPackage>
