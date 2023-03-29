@@ -116,7 +116,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/specifications/apis/Match.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/specifications/apis/Product.yaml</inputSpec>
                             <output>${project.basedir}</output>
                             <language>spring</language>
                             <generateApis>true</generateApis>
